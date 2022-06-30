@@ -1,2 +1,2 @@
-# AtlasSensor_Arduino_ITCH
+# AtlasSensor_Arduino
 Atlas Sensor Arduino Program
