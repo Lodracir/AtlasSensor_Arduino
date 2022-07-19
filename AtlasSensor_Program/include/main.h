@@ -1,4 +1,5 @@
 /* ----- Headers ----- */
+#include <Arduino.h>
 #include "AtlasSensor.h"
 
 /* ----- Defines ----- */
