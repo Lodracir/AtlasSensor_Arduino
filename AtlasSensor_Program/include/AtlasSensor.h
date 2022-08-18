@@ -21,15 +21,22 @@ class AtlSensor
   private:
   /* Variables Privadas */
   sensorType_t  sensorType;
-  uint8_t       _address;
+  uint8_t       address;
 
   /* Funciones Privadas */
   void writeCommand(char str[]);
   
   public:
   
+  /* Constructor para inicializar el sensor */
+  AtlSensor(uint8_t address, sensorType_t sensorType)
+  {
+    this->address    = address;
+    this->sensorType = sensorType;
+
+  }
+
   /* Funciones Publicas */
-  void      init(uint8_t _addr, sensorType_t _sensorType);    // Set device Address for I2C
   uint8_t   getAddress(void);                                 // Get device Address 
   byte      getValue(char _value[]);                          // Get pH Value
   void      find(void);

@@ -9,22 +9,16 @@ char find_cmd[5] = "find";
 void AtlSensor::writeCommand(char str[])
 {
 
-  Wire.beginTransmission(_address); /* Open I2C Communication */
+  Wire.beginTransmission(this->address); /* Open I2C Communication */
   Wire.write(str);                  /* Transmit Command */
   Wire.endTransmission();           /* End Transmission */
   
 }
 
 /* ----- Funciones Publicas ----- */
-void AtlSensor::init(uint8_t _addr, sensorType_t _sensorType)
-{
-  _address    = _addr;        // Set Device address
-  sensorType  = _sensorType;  // Set Sensor Type
-}
-
 uint8_t AtlSensor::getAddress(void)
 {
-  return _address;
+  return this->address;
 }
 
 AtlasSensor_state_t AtlSensor::getValue(char _value[])
@@ -46,7 +40,7 @@ AtlasSensor_state_t AtlSensor::getValue(char _value[])
      delay(600); // Delay 600 mS
    }
                        
-  Wire.requestFrom(_address, (uint8_t)20);  // Request from device
+  Wire.requestFrom(this->address, (uint8_t)20);  // Request from device
   code = Wire.read();                       // Read return code
 
   while( Wire.available() )

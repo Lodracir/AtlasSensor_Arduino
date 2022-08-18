@@ -1,11 +1,11 @@
 #include "main.h"
 
 /* ----- Class Objects ----- */
-AtlSensor pHSensor;
-AtlSensor disOxySensor;
-AtlSensor ORPSensor;
-AtlSensor ConductSensor;
-AtlSensor TempSensor;
+AtlSensor pHSensor(pHSensor_addr, ph_Sensor);
+AtlSensor disOxySensor(disOxySensor_addr, disOxy_Sensor);
+AtlSensor ORPSensor(ORPSensor_addr, ORP_Sensor);
+AtlSensor ConductSensor(ConducSensor_addr, Conduct_Sensor);
+AtlSensor TempSensor(TempSensor_addr, Temp_Sensor);
 
 /* ----- Global Variables ----- */
 char pHValue[15];
@@ -45,11 +45,6 @@ void loop()
 static void MX_AtlSensor_Init(void)
 {
   Wire.begin();                                           // Init I2C
-  pHSensor.init(pHSensor_addr, ph_Sensor);                // Set pH Sensor Address
-  disOxySensor.init(disOxySensor_addr, disOxy_Sensor);    // Set Disolved Oxygen Sensor Address
-  ORPSensor.init(ORPSensor_addr, ORP_Sensor);             // Set ORP Sensor Address
-  ConductSensor.init(ConducSensor_addr, Conduct_Sensor);  // Set Conductivity Sensor Address
-  TempSensor.init(TempSensor_addr, Temp_Sensor);          // Set Temoerature Sensor Address
 }
 
 static void AtlSensor_requestValue(void)
