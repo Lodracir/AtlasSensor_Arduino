@@ -1,13 +1,18 @@
+/** Librerias **/
 #include "main.h"
 
-/* ----- Class Objects ----- */
+/**
+ * Declaracion de los sensores (Objetos)
+ **/
 AtlSensor pHSensor(pHSensor_addr, ph_Sensor);
 AtlSensor disOxySensor(disOxySensor_addr, disOxy_Sensor);
 AtlSensor ORPSensor(ORPSensor_addr, ORP_Sensor);
 AtlSensor ConductSensor(ConducSensor_addr, Conduct_Sensor);
 AtlSensor TempSensor(TempSensor_addr, Temp_Sensor);
 
-/* ----- Global Variables ----- */
+/**
+ *  Variables Globales
+ **/
 char pHValue[15];
 char disolvedOxygenValue[15];
 char ORPValue[15];
@@ -15,14 +20,20 @@ char ConductivityValue[15];
 char TemperatureValue[15];
 char cmd = 'F';
 
+/**
+ *  Funcion de Inicializacion de perifericos y/o opciones iniciales
+ **/
 void setup() 
 {
    
   Serial.begin(BAUDRATE);     // Init UART com
-  MX_AtlSensor_Init();        // Init I2C and assign Atlas Sensor Addresses
+  Wire.begin();               // Init I2C
 
 }
 
+/**
+ *  Ciclo infinito (Main)
+ **/
 void loop() 
 {
   
@@ -40,11 +51,6 @@ void loop()
       cmd = 'F';
   }
   
-}
-
-static void MX_AtlSensor_Init(void)
-{
-  Wire.begin();                                           // Init I2C
 }
 
 static void AtlSensor_requestValue(void)

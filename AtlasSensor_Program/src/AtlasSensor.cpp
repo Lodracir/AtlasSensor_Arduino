@@ -9,9 +9,9 @@ char find_cmd[5] = "find";
 void AtlSensor::writeCommand(char str[])
 {
 
-  Wire.beginTransmission(this->address); /* Open I2C Communication */
-  Wire.write(str);                  /* Transmit Command */
-  Wire.endTransmission();           /* End Transmission */
+  Wire.beginTransmission(this->address);  /* Open I2C Communication */
+  Wire.write(str);                        /* Transmit Command */
+  Wire.endTransmission();                 /* End Transmission */
   
 }
 
@@ -28,18 +28,35 @@ AtlasSensor_state_t AtlSensor::getValue(char _value[])
   byte  code;  
   byte  in_char;
   int   i = 0;
+  int   delayTime = 0;
   
   writeCommand(read_cmd); // Send read command to pH Sensor 
   
-   if( (sensorType == ph_Sensor) || (sensorType == ORP_Sensor) )
-   {
-     delay(900); // Delay 900 mS
-   }
-   else if ( (sensorType == disOxy_Sensor) || (sensorType == Temp_Sensor ) || (sensorType == Conduct_Sensor) )
-   { 
-     delay(600); // Delay 600 mS
-   }
-                       
+  switch(sensorType)
+  {
+    case ph_Sensor:
+      delayTime = 900;
+      break;
+
+    case ORP_Sensor:
+      delayTime = 900;
+      break;
+
+    case disOxy_Sensor:
+      delayTime = 600;
+      break;
+
+    case Temp_Sensor:
+      delayTime = 600;
+      break;
+
+    case Conduct_Sensor:
+      delayTime = 600;
+      break;
+  }
+
+  delay(delayTime);
+
   Wire.requestFrom(this->address, (uint8_t)20);  // Request from device
   code = Wire.read();                       // Read return code
 

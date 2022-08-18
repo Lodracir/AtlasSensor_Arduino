@@ -11,6 +11,5 @@
 #define TempSensor_addr     0x66
 
 /* ----- Local Functions ----- */
-static void MX_AtlSensor_Init(void);        // Sensor Init
 static void AtlSensor_requestValue(void);   // Task 1
 static void AtlSensor_transmitValue(void);  // Task 2
